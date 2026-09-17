@@ -1,0 +1,48 @@
+
+server:
+  port: 8081
+
+spring:
+  application:
+    name: web-app
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.88.130:3306/lease?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    username: "root"
+    password: "Atguigu.123"
+    hikari:
+      connection-test-query: SELECT 1 # 自动检测连接
+      connection-timeout: 60000 #数据库连接超时时间,默认30秒
+      idle-timeout: 500000 #空闲连接存活最大时间，默认600000（10分钟）
+      max-lifetime: 540000 #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      maximum-pool-size: 12 #连接池最大连接数，默认是10
+      minimum-idle: 10 #最小空闲连接数量
+      pool-name: SPHHikariPool # 连接池名称
+  jackson:
+    time-zone: GMT+8
+
+  data:
+    redis:
+      host: 192.168.88.130
+      port: 6379
+      database: 0
+      password: ${REDIS_PASSWORD:123456}
+
+
+#用于打印框架生成的sql语句，便于调试
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+springdoc:
+  default-flat-param-object: true
+
+spug:
+  sms:
+    # 必填：Spug 推送助手地址，例如 https://push.spug.cc
+    endpoint: https://push.spug.cc
+    # 必填：在 Spug 控制台选择的官方短信模板编码
+    template-code: 4NbKBjz23ejpxWeP
+    # 可选：若所选模板要求验证码有效时长，在此填写分钟数
+    number: 3
+    connect-timeout: 3000
+    read-timeout: 5000

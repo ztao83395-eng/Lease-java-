@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: web-admin               # 子项1
+  datasource:                     # 子项2，与 application 平级
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://192.168.88.130:3306/lease?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    username: "root"
+    password: "Atguigu.123"
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 12
+      minimum-idle: 10
+      pool-name: SPHHikariPool
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+  data:
+    redis:
+      host: 192.168.88.130
+      port: 6379
+      database: 0
+      password: 123456
+
+server:                           # server 是独立的一级键，放在最下面即可
+  port: 8080
+
+# MyBatis-Plus 放在最下面
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+minio:
+  endpoint: http://192.168.88.130:9000
+  access-key: minioadmin
+  secret-key: minioadmin
+  bucket-name: lease
+
+springdoc:
+  default-flat-param-object: true
+
